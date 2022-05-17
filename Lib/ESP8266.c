@@ -214,20 +214,21 @@ char ESP8266_configure(void) {
 	// https://www.electronicshub.org/esp8266-at-commands/
 	
 	// Test Connection (expect "OK") -- If not exit with Error 1
-	uart2_put_string("AT\n\r");
-	if(!(uart2_get_char()=='O') && !(uart2_get_char()=='K')) {
+	uart2_put_string("\n\rAT\n\r");
+	if(!(uart2_get_char()=='O')) {
 		uart1_put_string("Error ESP");
 		return 1;
 	}
+	uart1_put_string("ESP OK\n\r");
 	
 	// Create WIFI network
-	uart2_put_string("AT+CWMODE=2\n\r");
-	uart2_put_string("AT+CWSAP=\"espTobi_Wild\", \"1234\",5,3 "); // Create Wifi network with name "espTobi", Password "1234", use channel 5 with WPA2_PSK Encryption
+	uart2_put_string("AT+CWMODE=3\n\r");
+	uart2_put_string("AT+CWSAP=\"espTobi_Wild\", \"1234\",5,3\n\r"); // Create Wifi network with name "espTobi", Password "1234", use channel 5 with WPA2_PSK Encryption
 	// Give esp 172.168.1.1 Address
 	// Give Gateway adress 172.168.1.100
 	// Create Subnet 255.255.255.0
 	uart2_put_string("AT+CIPSTA=\"172.168.1.100\", \"172.168.1.1\", \"255.255.255.0\"\n\r");  
-	// Start Server + Allow muiltiple Connections
+	// Start Server + Allow muiltiple Connectionsut
 	uart2_put_string("AT+CIPMUX=1\n\r");
 	// Start Telnet Server @ Port 23
 	uart2_put_string("AT+CIPSERVER=1,23\n\r");
@@ -285,9 +286,9 @@ int main() {
 	
 	if(ESP8266_configure()==1) {
 		// ERROR
-		uart1_put_string("ERROR\n\r");
+		uart1_put_string("ERROR\r\n\r\n");
 		wait_ms(10000);
-		uart1_put_string("Shutdown programme");
+		uart1_put_string("Shutdown program\n\r\n\r");
 		return 0;
 	}
 
@@ -348,8 +349,8 @@ int main() {
 			uart1_put_string("\n\r");
 			uart2_put_string(message);		
 			uart1_put_string(message);
-			uart2_put_string("\r");	
-			uart1_put_string("\r");	
+			uart2_put_string("\n\r");	
+			uart1_put_string("\n\r");	
 			// Message should now appear on different terminal
 		}
 		
