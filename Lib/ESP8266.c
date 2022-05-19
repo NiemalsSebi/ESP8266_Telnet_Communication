@@ -68,7 +68,7 @@ void init_USART2(void) {
 	
 	GPIOA->CRL &= 0xFFFF0FFF; // Reset PA3 configuration-bits
 	GPIOA->CRL |= 0x4000; 			// Rx (PA3) - floating
-	
+
 	RCC->APB1ENR |= 0x20000;	  // USART2 mit einem Takt versrogen
 	
 	USART2->CR1 &= ~0x1000; 	// M: --> Start bit, 8 Data bits, n Stop bit
@@ -76,7 +76,7 @@ void init_USART2(void) {
 	USART2->CR2 &= ~0x3000; 	// STOP: 00: 1 Stop bit
 	USART2->BRR = 0x0138; 		// set Baudrate to 115200 Baud (SysClk 36Mhz)
 	USART2->CR1 |= 0x0C; 			// enable Receiver and Transmitter
-	USART2->CR1 |= 0x2000; 		// Set USART Enable Bit
+	USART2->CR1 |= 0x2000; 		// Set USART2 Enable Bit
 }
 
 /*************************************************************************
@@ -216,7 +216,7 @@ char ESP8266_configure(void) {
 	// Test Connection (expect "OK") -- If not exit with Error 1
 	uart2_put_string("\n\rAT\n\r");
 	if(!(uart2_get_char()=='O')) {
-		uart1_put_string("Error ESP");
+		uart1_put_string("Error ESP\n\r");
 		return 1;
 	}
 	uart1_put_string("ESP OK\n\r");
