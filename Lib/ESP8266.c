@@ -214,11 +214,18 @@ char ESP8266_configure(void) {
 	// https://www.electronicshub.org/esp8266-at-commands/
 	
 	// Test Connection (expect "OK") -- If not exit with Error 1
-	uart2_put_string("\n\rAT\n\r");
+	uart2_put_string("AT\n\r");
+	
+	while(1) {
+		uart1_put_char(uart2_get_char());
+	}
+	
+	
 	if(!(uart2_get_char()=='O')) {
 		uart1_put_string("Error ESP\n\r");
 		return 1;
 	}
+	
 	uart1_put_string("ESP OK\n\r");
 	
 	// Create WIFI network

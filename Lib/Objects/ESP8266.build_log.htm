@@ -30,16 +30,18 @@ Rebuild target 'Target 1'
 assembling startup_stm32f10x_md.s...
 compiling system_stm32f10x.c...
 compiling ESP8266.c...
-ESP8266.c(297): warning:  #177-D: variable "buf"  was declared but never referenced
+ESP8266.c(224): warning:  #111-D: statement is unreachable
+  	if(!(uart2_get_char()=='O')) {
+ESP8266.c(304): warning:  #177-D: variable "buf"  was declared but never referenced
   	char buf;
-ESP8266.c(298): warning:  #177-D: variable "buf1"  was declared but never referenced
+ESP8266.c(305): warning:  #177-D: variable "buf1"  was declared but never referenced
   	char buf1;
-ESP8266.c(299): warning:  #177-D: variable "buf2"  was declared but never referenced
+ESP8266.c(306): warning:  #177-D: variable "buf2"  was declared but never referenced
   	char buf2;
-ESP8266.c: 3 warnings, 0 errors
+ESP8266.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=2276 RO-data=252 RW-data=0 ZI-data=1632  
-".\Objects\ESP8266.axf" - 0 Error(s), 3 Warning(s).
+Program Size: Code=1152 RO-data=252 RW-data=0 ZI-data=1632  
+".\Objects\ESP8266.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -64,13 +66,13 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: Keil::Device:Startup:1.0.0
-      Include file:  RTE_Driver\Config\RTE_Device.h
-      Source file:   Device\Source\system_stm32f10x.c
       Source file:   Device\Source\ARM\STM32F1xx_OPT.s
+      Include file:  RTE_Driver\Config\RTE_Device.h
       Source file:   Device\Source\ARM\startup_stm32f10x_md.s
+      Source file:   Device\Source\system_stm32f10x.c
 
    * Component: ARM::CMSIS:CORE:5.5.0
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>
